@@ -13,6 +13,7 @@ namespace Roblox
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private GroundCheck _groundCheck;
         [SerializeField] private CameraController _cameraController;
+        [SerializeField] private Animator _animator;
 
         [Header("Parameters")]
         [SerializeField] private float _moveSpeed;
@@ -25,6 +26,7 @@ namespace Roblox
         public Rigidbody Rigidbody => _rigidbody;
         public GroundCheck GroundCheck => _groundCheck;
         public CameraController CameraController => _cameraController;
+        public Animator Animator => _animator;
         public float MoveSpeed => _moveSpeed;
         public float JumpForce => _jumpForce;
         public float JumpMoveCoefficient => _jumpMoveCoefficient;
@@ -32,9 +34,9 @@ namespace Roblox
         private void Start()
         {
             _fsm = new Fsm();
-            _fsm.AddState(new PlayerStateIdle(_fsm, Rigidbody, Input, GroundCheck, CameraController));
-            _fsm.AddState(new PlayerStateRun(_fsm, Rigidbody, Input, GroundCheck, CameraController, MoveSpeed));
-            _fsm.AddState(new PlayerStateJump(_fsm, Rigidbody, Input, GroundCheck, CameraController, MoveSpeed, JumpForce, JumpMoveCoefficient));
+            _fsm.AddState(new PlayerStateIdle(_fsm, Rigidbody, Input, GroundCheck, CameraController, Animator));
+            _fsm.AddState(new PlayerStateRun(_fsm, Rigidbody, Input, GroundCheck, CameraController, Animator, MoveSpeed));
+            _fsm.AddState(new PlayerStateJump(_fsm, Rigidbody, Input, GroundCheck, CameraController, Animator, MoveSpeed, JumpForce, JumpMoveCoefficient));
 
             _fsm.SetState<PlayerStateIdle>();
         }
@@ -42,6 +44,10 @@ namespace Roblox
         private void Update()
         {
             _fsm.Update();
+        }
+
+        private void FixedUpdate()
+        {
             _fsm.FixedUpdate();
         }
     }

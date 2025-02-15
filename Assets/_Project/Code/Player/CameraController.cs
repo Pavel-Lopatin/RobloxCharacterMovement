@@ -26,6 +26,8 @@ namespace Roblox
         [SerializeField] private float _yMaxLimit = 80f;
 
         public Vector3 CameraForward => Vector3.ProjectOnPlane(_camera.forward, transform.up);
+        public Vector3 CameraRight => Vector3.ProjectOnPlane(_camera.right, transform.up);
+        public bool IsMouseHoldNow => _isMouseHold;
 
         private float x, y, _targetX, _targetY, _distance;
         private bool _isMouseHold = false;
@@ -34,6 +36,9 @@ namespace Roblox
         {
             _inputController.OnMouseRightButtonClicked += IsMouseHold;
             _inputController.OnMouseRightButtonReleased += IsMouseHold;
+
+            if (!_camera)
+                _camera = Camera.main.transform;
         }
 
         private void Start()
@@ -43,12 +48,12 @@ namespace Roblox
             y = angles.x;
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             RotateCamera(_inputController.MouseAxis, _inputController.MouseScroll);
         }
 
-        private void IsMouseHold() => _isMouseHold = !_isMouseHold;
+        public void IsMouseHold() => _isMouseHold = !_isMouseHold;
 
         private void RotateCamera(Vector2 mouseAxis, float mouseScroll)
         {
