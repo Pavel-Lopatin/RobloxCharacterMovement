@@ -5,7 +5,7 @@ namespace Roblox.FSM.Player
 {
     public class PlayerStateIdle : FsmState
     {
-        public PlayerStateIdle(Fsm fsm, Rigidbody rigidbody, InputController input, GroundCheck groundCheck, CameraController cameraController, Animator animator) : base(fsm, rigidbody, input, groundCheck, cameraController, animator)
+        public PlayerStateIdle(Fsm fsm, Rigidbody rigidbody, InputController input, GroundCheck groundCheck, CameraController cameraController, Animator animator, PlayerConfig playerConfig) : base(fsm, rigidbody, input, groundCheck, cameraController, animator, playerConfig)
         {
         }
 

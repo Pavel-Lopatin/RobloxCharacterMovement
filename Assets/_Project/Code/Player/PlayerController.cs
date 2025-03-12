@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Roblox
 {
     [RequireComponent(typeof(InputController), typeof(Rigidbody))]
-    public class Player : MonoBehaviour
+    public class PlayerController : MonoBehaviour
     {
         [Header("Components")]
         [SerializeField] private InputController _input;
@@ -15,10 +15,8 @@ namespace Roblox
         [SerializeField] private CameraController _cameraController;
         [SerializeField] private Animator _animator;
 
-        [Header("Parameters")]
-        [SerializeField] private float _moveSpeed;
-        [SerializeField] private float _jumpForce;
-        [SerializeField, Range(0.1f, 1f)] private float _jumpMoveCoefficient;
+        [Header("Config")]
+        [SerializeField] private PlayerConfig _playerConfig;
 
         private Fsm _fsm;
 
@@ -27,16 +25,13 @@ namespace Roblox
         public GroundCheck GroundCheck => _groundCheck;
         public CameraController CameraController => _cameraController;
         public Animator Animator => _animator;
-        public float MoveSpeed => _moveSpeed;
-        public float JumpForce => _jumpForce;
-        public float JumpMoveCoefficient => _jumpMoveCoefficient;
 
         private void Start()
         {
             _fsm = new Fsm();
-            _fsm.AddState(new PlayerStateIdle(_fsm, Rigidbody, Input, GroundCheck, CameraController, Animator));
-            _fsm.AddState(new PlayerStateRun(_fsm, Rigidbody, Input, GroundCheck, CameraController, Animator, MoveSpeed));
-            _fsm.AddState(new PlayerStateJump(_fsm, Rigidbody, Input, GroundCheck, CameraController, Animator, MoveSpeed, JumpForce, JumpMoveCoefficient));
+            _fsm.AddState(new PlayerStateIdle(_fsm, Rigidbody, Input, GroundCheck, CameraController, Animator, _playerConfig));
+            _fsm.AddState(new PlayerStateRun(_fsm, Rigidbody, Input, GroundCheck, CameraController, Animator, _playerConfig));
+            _fsm.AddState(new PlayerStateJump(_fsm, Rigidbody, Input, GroundCheck, CameraController, Animator, _playerConfig));
 
             _fsm.SetState<PlayerStateIdle>();
         }
@@ -52,4 +47,3 @@ namespace Roblox
         }
     }
 }
-

@@ -5,13 +5,8 @@ namespace Roblox.FSM.Player
 {
     public class PlayerStateJump : PlayerStateMovement
     {
-        private float _jumpForce;
-        private float _jumpMoveCoefficent;
-
-        public PlayerStateJump(Fsm fsm, Rigidbody rigidbody, InputController input, GroundCheck groundCheck, CameraController cameraController, Animator animator, float moveSpeed, float jumpForce, float jumpMoveCoefficient) : base(fsm, rigidbody, input, groundCheck, cameraController, animator, moveSpeed)
+        public PlayerStateJump(Fsm fsm, Rigidbody rigidbody, InputController input, GroundCheck groundCheck, CameraController cameraController, Animator animator, PlayerConfig playerConfig) : base(fsm, rigidbody, input, groundCheck, cameraController, animator, playerConfig)
         {
-            _jumpForce = jumpForce;
-            _jumpMoveCoefficent = jumpMoveCoefficient;
         }
 
         public override void Enter()
@@ -39,14 +34,13 @@ namespace Roblox.FSM.Player
 
         public override void FixedUpdate()
         {
-            Move(_input.MoveDirection, _jumpMoveCoefficent);
+            Move(_input.MoveDirection, _playerConfig.JumpMoveCoefficient);
         }
 
         private void Jump()
         {
             _groundCheck.DisableGroundCheck();
-            _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+            _rigidbody.AddForce(Vector3.up * _playerConfig.JumpForce, ForceMode.Impulse);
         }
-
     }
 }

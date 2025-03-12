@@ -5,16 +5,13 @@ namespace Roblox.FSM.Player
 {
     public class PlayerStateMovement : FsmState
     {
-        protected readonly float _moveSpeed;
-
-        public PlayerStateMovement(Fsm fsm, Rigidbody rigidbody, InputController input, GroundCheck groundCheck, CameraController cameraController, Animator animator, float moveSpeed) : base(fsm, rigidbody, input, groundCheck, cameraController, animator)
+        public PlayerStateMovement(Fsm fsm, Rigidbody rigidbody, InputController input, GroundCheck groundCheck, CameraController cameraController, Animator animator, PlayerConfig playerConfig) : base(fsm, rigidbody, input, groundCheck, cameraController, animator, playerConfig)
         {
-            _moveSpeed = moveSpeed;
         }
 
         public virtual void Move(Vector3 inputDirection, float jumpSpeedCoefficient) 
         {
-            Vector3 targetVelocity = inputDirection * _moveSpeed * jumpSpeedCoefficient;
+            Vector3 targetVelocity = inputDirection * _playerConfig.MoveSpeed * jumpSpeedCoefficient;
 
             Vector3 forward = _cameraController.CameraForward;
             Vector3 right = _cameraController.CameraRight;
@@ -41,7 +38,5 @@ namespace Roblox.FSM.Player
             Vector3 movement = verticalDirection + horizontalDirection;
             _rigidbody.linearVelocity = movement;
         }
-        
     }
-
 }

@@ -11,8 +11,9 @@ namespace Roblox.FSM
         protected readonly GroundCheck _groundCheck;
         protected readonly CameraController _cameraController;
         protected readonly Animator _animator;
+        protected readonly PlayerConfig _playerConfig;
 
-        public FsmState(Fsm fsm, Rigidbody rigidbody,  InputController input, GroundCheck groundCheck, CameraController cameraController, Animator animator)
+        public FsmState(Fsm fsm, Rigidbody rigidbody,  InputController input, GroundCheck groundCheck, CameraController cameraController, Animator animator, PlayerConfig playerConfig)
         {
             _fsm = fsm;
             _input = input;
@@ -20,6 +21,7 @@ namespace Roblox.FSM
             _groundCheck = groundCheck;
             _cameraController = cameraController;
             _animator = animator;
+            _playerConfig = playerConfig;
         }
 
         public virtual void Enter() { }

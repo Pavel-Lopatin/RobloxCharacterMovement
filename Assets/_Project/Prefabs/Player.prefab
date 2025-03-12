@@ -2384,9 +2384,7 @@ MonoBehaviour:
   _groundCheck: {fileID: 8587517826576547261}
   _cameraController: {fileID: 608011665839346658}
   _animator: {fileID: 8350190956972898329}
-  _moveSpeed: 4
-  _jumpForce: 6.2
-  _jumpMoveCoefficient: 0.75
+  _playerConfig: {fileID: 11400000, guid: 461aa8e43e3976840836af858c100026, type: 2}
 --- !u!114 &1021313347987454101
 MonoBehaviour:
   m_ObjectHideFlags: 0

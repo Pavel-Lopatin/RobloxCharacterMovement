@@ -5,8 +5,7 @@ namespace Roblox.FSM.Player
 {
     public class PlayerStateRun : PlayerStateMovement
     {
-
-        public PlayerStateRun(Fsm fsm, Rigidbody rigidbody, InputController input, GroundCheck groundCheck, CameraController cameraController, Animator animator, float moveSpeed) : base(fsm, rigidbody, input, groundCheck, cameraController, animator, moveSpeed)
+        public PlayerStateRun(Fsm fsm, Rigidbody rigidbody, InputController input, GroundCheck groundCheck, CameraController cameraController, Animator animator, PlayerConfig playerConfig) : base(fsm, rigidbody, input, groundCheck, cameraController, animator, playerConfig)
         {
         }
 
